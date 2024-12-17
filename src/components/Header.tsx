@@ -10,8 +10,8 @@ export default function Header() {
         <Link to="/social">Social</Link>
         <Link to="/apps">Apps</Link>
         <Link to="/archive">Archive</Link>
-        <a href="https://github.com/FatCatLikesBeer" target="_blank"><img src="../../public/github-mark-white.png" className="link_logo" /></a>
-        <a href="https://billlaaayyy.bsky.social" target="_blank"><img src="../../public/bluesky_logo_light.png" className="link_logo" /></a>
+        <a href="https://github.com/FatCatLikesBeer" target="_blank"><img src="/github-mark-white.png" className="link_logo" /></a>
+        <a href="https://billlaaayyy.bsky.social" target="_blank"><img src="/bluesky_logo_light.png" className="link_logo" /></a>
       </nav>
     </header>
   );
