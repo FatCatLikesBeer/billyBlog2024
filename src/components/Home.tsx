@@ -4,7 +4,7 @@ import { marked } from "marked";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
-export default function Body() {
+export default function Home() {
   const [posts, setPosts] = useState<BillyBlogPost[]>(placeHolderContent);
   const pb = useAtomValue(PocketBaseAtom);
 

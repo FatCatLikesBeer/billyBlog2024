@@ -1,22 +1,53 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  padding: 0 1rem;
 }
 
 .footer {
   position: absolute;
+}
+
+#header_div {
+}
+
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5em;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 1em;
+}
+
+#hero_title {
+  font-size: 1.5rem;
+}
+
+#navigation {
+  display: flex;
+  gap: 1rem;
+}
+
+.link_logo {
+  width: 1.5em;
+}
+
+@media (prefers-color-scheme: light) {
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  .link_logo {
+    filter: invert(100%);
+  }
 }
