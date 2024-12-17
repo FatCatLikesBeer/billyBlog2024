@@ -4,6 +4,8 @@ import { marked } from "marked";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
+const URL = "https://billy-blog.pockethost.io/api/files/";
+
 export default function Home() {
   const [posts, setPosts] = useState<BillyBlogPost[]>(placeHolderContent);
   const pb = useAtomValue(PocketBaseAtom);
@@ -13,6 +15,7 @@ export default function Home() {
       .then((response) => {
         const items = response.items;
         setPosts([...items]);
+        console.log(response);
       });
   }, []);
 
@@ -26,6 +29,7 @@ export default function Home() {
             <h3 key={post.id + 'title'} className="post_title">{post.title}</h3>
             <p key={post.id + 'timestamp'} className="post_time_stamp">{formatTimeStamp(post.created)}</p>
             <p key={post.id + 'body'} className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }}></p>
+            {post.attachment ? <img src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`} /> : ""}
           </div>
         );
       })}

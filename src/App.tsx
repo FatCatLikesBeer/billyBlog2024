@@ -6,6 +6,7 @@ import About from './components/About';
 import Social from './components/Social';
 import Archive from './components/Archive';
 import Apps from './components/Apps.tsx';
+import MakePost from './components/MakePost.tsx';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/apps" element={<Apps />} />
+        <Route path="/make_post" element={<MakePost />} />
       </Routes>
       <Footer />
     </div>

@@ -51,3 +51,7 @@ th, td {
     filter: invert(100%);
   }
 }
+
+form > * {
+  display: block;
+}
