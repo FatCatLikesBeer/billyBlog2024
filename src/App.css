@@ -8,6 +8,21 @@
   position: absolute;
 }
 
+.post_attachment {
+  width: 20%;
+  height: 20%;
+}
+
+.post_attachment_expand {
+  width: 90vw;
+  padding: 1rem;
+}
+
+.post {
+  padding-bottom: 2rem;
+  border-bottom: 2px solid white;
+}
+
 #header_div {
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 import { marked } from "marked";
+import formatTimeStamp from "../library/formatTimeStamp";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
@@ -11,13 +12,21 @@ export default function Home() {
   const pb = useAtomValue(PocketBaseAtom);
 
   useEffect(() => {
-    pb.collection('posts').getList<BillyBlogPost>()
+    pb.collection('posts').getList<BillyBlogPost>(1, 20, { sort: "-created" })
       .then((response) => {
         const items = response.items;
         setPosts([...items]);
-        console.log(response);
+        // console.log(response);
       });
   }, []);
+
+  function embiggenImage(element: HTMLImageElement) {
+    if (element.className == "post_attachment") {
+      element.className = "post_attachment_expand";
+    } else {
+      element.className = "post_attachment"
+    }
+  }
 
   return (
     <div>
@@ -25,11 +34,20 @@ export default function Home() {
         let parsedBody = String(marked.parse(post.body));
         parsedBody = parsedBody.substring(3, parsedBody.length - 5);
         return (
-          <div key={post.id + 'div'}>
+          <div key={post.id + 'div'} className="post">
             <h3 key={post.id + 'title'} className="post_title">{post.title}</h3>
             <p key={post.id + 'timestamp'} className="post_time_stamp">{formatTimeStamp(post.created)}</p>
             <p key={post.id + 'body'} className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }}></p>
-            {post.attachment ? <img src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`} /> : ""}
+            {post.attachment
+              ?
+              <img
+                className="post_attachment"
+                key={post.id + 'attachment'}
+                src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
+                onClick={(e) => embiggenImage(e.currentTarget)}
+              />
+              :
+              ""}
           </div>
         );
       })}
@@ -43,16 +61,3 @@ const placeHolderContent: BillyBlogPost[] = [{
   created: "1969-12-1",
   body: "Text will go here",
 }];
-
-function formatTimeStamp(timeStamp: string) {
-  const date = new Date(timeStamp);
-
-  return date.toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true
-  });
-}

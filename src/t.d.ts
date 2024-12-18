@@ -11,5 +11,5 @@ interface BillyBlogDraft {
   author: string;
   title: string;
   body: string;
-  attachment?: File;
+  attachment?: Blob;
 }
