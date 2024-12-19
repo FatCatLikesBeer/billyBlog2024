@@ -76,7 +76,7 @@ const placeHolderContent: BillyBlogArchive[] = [{
   title: "",
   created: "none",
   body: "",
-  timeStamp: ""
+  timeStamp: "none",
 }];
 
 interface BillyBlogArchive extends BillyBlogPost {
