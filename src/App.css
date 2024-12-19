@@ -2,6 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
+  font-family: Helvetica, sans-serif;
 }
 
 .footer {
@@ -19,7 +20,7 @@
 }
 
 .post {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid white;
 }
 
@@ -53,6 +54,11 @@ th, td {
   gap: 1rem;
 }
 
+#navigation > * {
+  display: flex;
+  gap: 1rem;
+}
+
 .link_logo {
   width: 1.5em;
 }
@@ -69,4 +75,15 @@ th, td {
 
 form > * {
   display: block;
+}
+
+@media (max-width: 768px) {
+  #header {
+    flex-direction: column;
+  }
+  #navigation {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 1em;
+  }
 }

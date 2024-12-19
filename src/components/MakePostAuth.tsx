@@ -34,13 +34,16 @@ export default function MakePostAuth({ setLoggedIn }: { setLoggedIn: Dispatch<Se
   return (
     <form>
       <label htmlFor="email" >Email: </label>
-      <input value={form.email} onChange={handleEmail} />
+      <input value={form.email} onChange={handleEmail} type="email" />
       <br />
+
       <label htmlFor="password">Password: </label>
       <input type="password" value={form.password} onChange={handlePassword} />
       <br />
+
       <button onClick={handleSubmit} type="button">Submit</button>
       <br />
+
       <p>{errMessage.length > 2 ? errMessage.toString() : ""}</p>
     </form>
   );

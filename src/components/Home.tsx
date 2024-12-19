@@ -16,7 +16,6 @@ export default function Home() {
       .then((response) => {
         const items = response.items;
         setPosts([...items]);
-        // console.log(response);
       });
   }, []);
 
@@ -57,7 +56,7 @@ export default function Home() {
 
 const placeHolderContent: BillyBlogPost[] = [{
   id: "1",
-  title: "This is palceholder text",
-  created: "1969-12-1",
-  body: "Text will go here",
+  title: "",
+  created: "",
+  body: "",
 }];
