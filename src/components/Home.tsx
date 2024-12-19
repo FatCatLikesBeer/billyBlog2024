@@ -18,7 +18,7 @@ customRenderer.link = function({ href, title, text }) {
 
 marked.setOptions({
   renderer: customRenderer,
-})
+});
 
 export default function Home() {
   const [posts, setPosts] = useState<BillyBlogPost[]>(placeHolderContent);

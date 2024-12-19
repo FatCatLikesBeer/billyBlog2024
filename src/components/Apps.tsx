@@ -22,6 +22,11 @@ export default function Apps() {
         <td><a href="https://github.com/FatCatLikesBeer/chat-app-back-end" target="_blank">GitHub</a></td>
       </tr>
       <tr>
+        <td><a href="https://letter-finder.fly.dev/" target="_blank">letter-finder</a></td>
+        <td>letter-finder: a Where's Waldo like game</td>
+        <td><a href="https://github.com/FatCatLikesBeer/waldo" target="_blank">GitHub</a></td>
+      </tr>
+      <tr>
         <td><a href="https://bored-programmer-api.fly.dev/" target="_blank">Bored Programmer</a></td>
         <td>Like boredapi.com (RIP) but for programmers! 💻</td>
         <td><a href="https://github.com/FatCatLikesBeer/bored_programmer" target="_blank">GitHub</a></td>

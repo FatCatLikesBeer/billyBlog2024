@@ -63,6 +63,34 @@ th, td {
   width: 1.5em;
 }
 
+form > * {
+  display: block;
+}
+
+.post_time_stamp {
+  margin-top: 0.0rem;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.post_title {
+  margin-bottom: 0.0rem;
+}
+
+.super_script {
+  text-decoration: none;
+}
+
+.index_text {
+  color: grey;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+sup {
+  font-size: 0.7rem;
+}
+
 @media (prefers-color-scheme: light) {
   table, th, td {
     border: 1px solid black;
@@ -71,10 +99,6 @@ th, td {
   .link_logo {
     filter: invert(100%);
   }
-}
-
-form > * {
-  display: block;
 }
 
 @media (max-width: 768px) {
@@ -88,12 +112,3 @@ form > * {
   }
 }
 
-.post_time_stamp {
-  margin-top: 0.0rem;
-  font-size: 0.8rem;
-  font-style: italic;
-}
-
-.post_title {
-  margin-bottom: 0.0rem;
-}
