@@ -7,6 +7,19 @@ import PocketBaseAtom from "../state/PocketBaseAtom";
 
 const URL = "https://billy-blog.pockethost.io/api/files/";
 
+const customRenderer = new marked.Renderer();
+
+customRenderer.link = function({ href, title, text }) {
+  const targetAttribute = 'target="_blank"';
+  const relAttribute = 'rel="noopener noreferrer"';
+  const titleAttribute = title ? `title=${title}` : '';
+  return `<a href=${href} ${titleAttribute} ${relAttribute} ${targetAttribute}>${text}</a>`
+}
+
+marked.setOptions({
+  renderer: customRenderer,
+})
+
 export default function Home() {
   const [posts, setPosts] = useState<BillyBlogPost[]>(placeHolderContent);
   const pb = useAtomValue(PocketBaseAtom);
@@ -57,6 +70,6 @@ export default function Home() {
 const placeHolderContent: BillyBlogPost[] = [{
   id: "1",
   title: "",
-  created: "",
+  created: "none",
   body: "",
 }];

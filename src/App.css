@@ -84,6 +84,16 @@ form > * {
   #navigation {
     flex-direction: column-reverse;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
+}
+
+.post_time_stamp {
+  margin-top: 0.0rem;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.post_title {
+  margin-bottom: 0.0rem;
 }
