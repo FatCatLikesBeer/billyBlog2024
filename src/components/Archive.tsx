@@ -3,23 +3,13 @@ import { useAtomValue } from "jotai";
 import { marked } from "marked";
 import formatTimeStamp from "../library/formatTimeStamp";
 import embiggenImage from "../library/embiggenImage";
+import customRenderer from "../library/markedCustomRenderer";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
 const URL = "https://billy-blog.pockethost.io/api/files/";
 
-const customRenderer = new marked.Renderer();
-
-customRenderer.link = function({ href, title, text }) {
-  const targetAttribute = 'target="_blank"';
-  const relAttribute = 'rel="noopener noreferrer"';
-  const titleAttribute = title ? `title=${title}` : '';
-  return `<a href=${href} ${titleAttribute} ${relAttribute} ${targetAttribute}>${text}</a>`
-}
-
-marked.setOptions({
-  renderer: customRenderer,
-});
+marked.setOptions({ renderer: customRenderer });
 
 export default function Home({ archive, setArchive }: { archive: BillyBlogArchive[]; setArchive: React.Dispatch<BillyBlogArchive[]> }) {
   const pb = useAtomValue(PocketBaseAtom);

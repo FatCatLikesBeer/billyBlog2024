@@ -9,9 +9,7 @@ import PocketBaseAtom from "../state/PocketBaseAtom";
 
 const URL = "https://billy-blog.pockethost.io/api/files/";
 
-marked.setOptions({
-  renderer: customRenderer,
-});
+marked.setOptions({ renderer: customRenderer });
 
 export default function Home({ posts, setPosts }: { posts: BillyBlogPost[]; setPosts: React.Dispatch<BillyBlogPost[]> }) {
   const pb = useAtomValue(PocketBaseAtom);

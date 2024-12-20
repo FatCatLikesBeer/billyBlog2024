@@ -10,7 +10,7 @@ import PocketBaseAtom from "../state/PocketBaseAtom";
 
 const URL = "https://billy-blog.pockethost.io/api/files/";
 
-marked.setOptions({ renderer: customRenderer, });
+marked.setOptions({ renderer: customRenderer });
 
 export default function StaticArchive() {
   const [errTimer, setErrTiemr] = useState(false);
