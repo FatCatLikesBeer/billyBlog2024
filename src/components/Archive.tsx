@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAtomValue } from "jotai";
 import { marked } from "marked";
 import formatTimeStamp from "../library/formatTimeStamp";
+import embiggenImage from "../library/embiggenImage";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
@@ -20,38 +21,30 @@ marked.setOptions({
   renderer: customRenderer,
 });
 
-export default function Home() {
-  const [posts, setPosts] = useState<BillyBlogArchive[]>(placeHolderContent);
+export default function Home({ archive, setArchive }: { archive: BillyBlogArchive[]; setArchive: React.Dispatch<BillyBlogArchive[]> }) {
   const pb = useAtomValue(PocketBaseAtom);
 
   useEffect(() => {
-    pb.collection('archive').getList<BillyBlogArchive>(1, 20, { sort: "-created" })
-      .then((response) => {
-        const items = response.items;
-        setPosts([...items]);
-      });
-  }, []);
-
-  function embiggenImage(element: HTMLImageElement) {
-    if (element.className == "post_attachment") {
-      element.className = "post_attachment_expand";
-    } else {
-      element.className = "post_attachment"
+    if (archive.length <= 1) {
+      pb.collection('archive').getList<BillyBlogArchive>(1, 20, { sort: "-created" })
+        .then((response) => {
+          const items = response.items;
+          setArchive([...items]);
+        });
     }
-  }
+  }, []);
 
   return (
     <div>
-      {posts.map((post) => {
+      {archive.map((post) => {
         let parsedBody = post.body;
-        console.log(parsedBody);
         parsedBody = parsedBody.replaceAll("\\r", "");
         parsedBody = parsedBody.replaceAll("\\n", "\n");
         parsedBody = parsedBody.replaceAll("\\", "");
         parsedBody = String(marked.parse(parsedBody));
         return (
           <div key={post.id + 'div'} className="post">
-            <h3 key={post.id + 'title'} className="post_title">{post.title}</h3>
+            <h3 key={post.id + 'title'} className="post_title"><a href={`/archives/${post.id}`}>{post.title}</a></h3>
             <p key={post.id + 'timestamp'} className="post_time_stamp">{formatTimeStamp(post.timeStamp)}</p>
             <p key={post.id + 'body'} className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }}></p>
             {post.attachment
@@ -69,16 +62,4 @@ export default function Home() {
       })}
     </div>
   );
-}
-
-const placeHolderContent: BillyBlogArchive[] = [{
-  id: "1",
-  title: "",
-  created: "none",
-  body: "",
-  timeStamp: "none",
-}];
-
-interface BillyBlogArchive extends BillyBlogPost {
-  timeStamp: string;
 }

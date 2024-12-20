@@ -44,7 +44,7 @@ export default function MakePostAuth({ setLoggedIn }: { setLoggedIn: Dispatch<Se
       <button onClick={handleSubmit} type="button">Submit</button>
       <br />
 
-      <p>{errMessage.length > 2 ? errMessage.toString() : ""}</p>
+      <p className="error_message">{errMessage.length > 2 ? errMessage.toString() : ""}</p>
     </form>
   );
 }

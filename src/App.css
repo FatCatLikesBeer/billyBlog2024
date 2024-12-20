@@ -112,3 +112,6 @@ sup {
   }
 }
 
+.error_message {
+  color: red;
+}

@@ -7,6 +7,10 @@ interface BillyBlogPost {
   collectionId?: string;
 }
 
+interface BillyBlogArchive extends BillyBlogPost {
+  timeStamp: string;
+}
+
 interface BillyBlogDraft {
   author: string;
   title: string;
