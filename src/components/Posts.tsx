@@ -34,7 +34,6 @@ export default function Posts({
         });
       pb.collection('comments').getFullList<BillyBlogPostComment>({ sort: "-created" })
         .then((response) => {
-          console.log("response", response);
           const commentsObjCollection: BillyBlogPostCommentCollection = {};
           response.forEach((element: BillyBlogPostComment) => {
             if (!commentsObjCollection[element.parent]) {
@@ -42,9 +41,7 @@ export default function Posts({
             }
             commentsObjCollection[element.parent]?.push(element);
           });
-          console.log("Comment object collection", commentsObjCollection);
           setPostComments({ ...commentsObjCollection });
-          console.log("Post comments", postComments);
         });
     }
   }, []);
@@ -68,13 +65,13 @@ export default function Posts({
                   src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
                   onClick={(e) => embiggenImage(e.currentTarget)}
                 />
-                <div className="post_comment_container">
+                <div className="post_comment_container" key={post.id + "comment_container"}>
                   {postComments[post?.id]?.map((element) => {
                     return (
-                      <>
-                        <p className="post_comment_author">{element.author} — {formatTimeStamp(element.created)}</p>
-                        <p className="post_comment_body">{element.body}</p>
-                      </>
+                      <div key={element.id + "comment"}>
+                        <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
+                        <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+                      </div>
                     )
                   })}
                 </div>

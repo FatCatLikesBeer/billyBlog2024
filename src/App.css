@@ -124,13 +124,13 @@ sup {
 
 .post_comment_container > * {
   font-size: 0.8rem;
-  margin: 0 0 0;
 }
 
 .post_comment_author {
   font-style: italic;
+  margin: 0 0 0;
 }
 
 .post_comment_body {
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.4rem;
 }
