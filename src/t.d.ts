@@ -17,3 +17,15 @@ interface BillyBlogDraft {
   body: string;
   attachment?: Blob;
 }
+
+interface BillyBlogPostComment {
+  id: string;
+  created: string;
+  body: string;
+  author: string;
+  parent: string;
+}
+
+interface BillyBlogPostCommentCollection {
+  [key: string]: BillyBlogPostComment[];
+}

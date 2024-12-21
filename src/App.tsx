@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './components/Home';
+import Posts from './components/Posts';
 import About from './components/About';
 import Social from './components/Social';
 import Archive from './components/Archive';
@@ -16,13 +16,14 @@ import { placeHolderPost, placeHolderArchive } from './state/staticData.ts';
 
 function App() {
   const [posts, setPosts] = useState<BillyBlogPost[]>(placeHolderPost);
+  const [postComments, setPostComments] = useState<BillyBlogPostCommentCollection>({});
   const [archive, setArchive] = useState<BillyBlogArchive[]>(placeHolderArchive);
 
   return (
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home posts={posts} setPosts={setPosts} />} />
+        <Route path="/" element={<Posts posts={posts} setPosts={setPosts} postComments={postComments} setPostComments={setPostComments} />} />
         <Route path="/posts" element={<Navigate to="/" />} />
         <Route path="/about" element={<About />} />
         <Route path="/social" element={<Social />} />
@@ -38,3 +39,6 @@ function App() {
 }
 
 export default App;
+
+// TODO: Implement comments for posts. Admins can delete comments while logged in.
+// TODO: Maybe make a custom API endpoint for PockeBase for comment/email validation.

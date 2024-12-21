@@ -115,3 +115,22 @@ sup {
 .error_message {
   color: red;
 }
+
+.post_comment_container {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid darkgrey;
+}
+
+.post_comment_container > * {
+  font-size: 0.8rem;
+  margin: 0 0 0;
+}
+
+.post_comment_author {
+  font-style: italic;
+}
+
+.post_comment_body {
+  margin-bottom: 0.4rem;
+}
