@@ -23,11 +23,29 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Posts posts={posts} setPosts={setPosts} postComments={postComments} setPostComments={setPostComments} />} />
+        <Route
+          path="/"
+          element={
+            <Posts
+              posts={posts}
+              setPosts={setPosts}
+              postComments={postComments}
+              setPostComments={setPostComments}
+            />
+          }
+        />
+        <Route
+          path="/archives"
+          element={
+            <Archive
+              archive={archive}
+              setArchive={setArchive}
+            />
+          }
+        />
         <Route path="/posts" element={<Navigate to="/" />} />
         <Route path="/about" element={<About />} />
         <Route path="/social" element={<Social />} />
-        <Route path="/archives" element={<Archive archive={archive} setArchive={setArchive} />} />
         <Route path="/apps" element={<Apps />} />
         <Route path="/make_post" element={<MakePost />} />
         <Route path="/posts/:postId" element={<StaticPost />} />

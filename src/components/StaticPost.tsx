@@ -13,31 +13,57 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 marked.setOptions({ renderer: customRenderer });
 
 export default function StaticPost() {
+  const params = useParams();
   const [errTimer, setErrTiemr] = useState(false);
   const [errMessage, setErrMessage] = useState<string>("");
   const [post, setPost] = useState<BillyBlogPost>(placeHolderPost[0] as BillyBlogPost);
-  const params = useParams();
+  const [comments, setComments] = useState<BillyBlogPostComment[]>([]);
+  const [createComment, setCreateComment] = useState({ author: "", body: "", parent: params.postId });
   const pb = useAtomValue(PocketBaseAtom);
 
   useEffect(() => {
     if (params.postId) {
       pb.collection('posts').getOne<BillyBlogPost>(params.postId)
         .then((response) => { setPost((response)) })
-        .catch((error) => { setErrMessage(error.message) })
+        .catch((error) => { setErrMessage(error.message + " 😩") })
         .finally(() => {
           setTimeout(() => {
             setErrTiemr(true);
           }, 5000);
         });
+      pb.collection('comments').getFullList<BillyBlogPostComment>({ filter: `parent.id = '${params.postId}'`, sort: "-created" })
+        .then((response) => { setComments(response) });
     }
   }, []);
 
   let parsedBody = String(marked.parse(post.body));
   parsedBody = parsedBody.substring(3, parsedBody.length - 5);
 
+  function setCommenterAuthor(event: React.ChangeEvent<HTMLInputElement>) {
+    const commentObject = { ...createComment };
+    commentObject.author = event.target.value;
+    setCreateComment({ ...commentObject });
+  }
+
+  function setCommenterBody(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    const commentObject = { ...createComment };
+    commentObject.body = event.target.value;
+    setCreateComment({ ...commentObject });
+  }
+
+  function handleSubmit() {
+    pb.collection('comments').create<BillyBlogPostComment>(createComment)
+      .then((response) => {
+        const workingComments = [...comments].reverse();
+        workingComments.push(response);
+        setComments(workingComments.reverse());
+      });
+    setCreateComment({ author: "", body: "", parent: params.postId });
+  }
+
   return (
     <>
-      <p className="error_message">{errMessage.length > 2 && post.id.length < 2 && errTimer ? errMessage.toString() : ""}</p>
+      {errMessage.length > 2 && post.id.length < 2 && errTimer ? <p className="error_message">errMessage.toString()</p> : ""}
       <div key={post.id + 'div'} className="post">
         <h3 key={post.id + 'title'} className="post_title">{post.title}</h3>
         <p key={post.id + 'timestamp'} className="post_time_stamp">{formatTimeStamp(post.created)}</p>
@@ -52,7 +78,49 @@ export default function StaticPost() {
           />
           :
           ""}
+        {/* Comments */}
+        <div className="post_comment_container" key={post.id + "comment_container"}>
+          {comments?.map((element) => {
+            return (
+              <div key={element.id + "comment"} className="post_comment_block">
+                <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
+                <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+              </div>
+            )
+          })}
+        </div>
+        {/* Comment Form */}
+        {post.id.length < 2
+          ?
+          ""
+          :
+          <form className="comment_form">
+            <input
+              type="text"
+              name="Name"
+              placeholder="Name"
+              className="comment_name"
+              value={createComment.author}
+              onChange={setCommenterAuthor}
+            />
+            <textarea
+              name="Body"
+              placeholder="Comment here"
+              className="comment_body"
+              value={createComment.body}
+              onChange={setCommenterBody}
+            />
+            <button
+              className="comment_submit"
+              onClick={handleSubmit}
+              type="button"
+              disabled={(createComment.author.length < 1) || (createComment.body.length < 2) ? true : false}
+            >Comment</button>
+          </form>
+        }
       </div>
     </>
   );
 }
+
+// TODO: Add comments to posts details page (here)

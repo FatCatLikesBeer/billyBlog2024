@@ -51,7 +51,7 @@ export default function MakePostForm({ pb }: { pb: PocketBase }) {
 
           <br />
 
-          <button onClick={handlePreview} type="button">Preview</button>
+          <button onClick={handlePreview} type="button" disabled={((post.title.length < 3) || (post.body.length < 3)) ? true : false}>Preview</button>
         </form>
       }
     </>

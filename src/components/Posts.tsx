@@ -65,19 +65,19 @@ export default function Posts({
                   src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
                   onClick={(e) => embiggenImage(e.currentTarget)}
                 />
-                <div className="post_comment_container" key={post.id + "comment_container"}>
-                  {postComments[post?.id]?.map((element) => {
-                    return (
-                      <div key={element.id + "comment"}>
-                        <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
-                        <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
-                      </div>
-                    )
-                  })}
-                </div>
               </>
               :
               ""}
+            <div className="post_comment_container" key={post.id + "comment_container"}>
+              {postComments[post?.id]?.map((element) => {
+                return (
+                  <div key={element.id + "comment"} className="post_comment_block">
+                    <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
+                    <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         );
       })}

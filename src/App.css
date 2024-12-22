@@ -6,7 +6,7 @@
 }
 
 .footer {
-  position: absolute;
+  margin-bottom: 8rem;
 }
 
 .post_attachment {
@@ -133,4 +133,15 @@ sup {
 
 .post_comment_body {
   margin: 0 0 0.4rem;
+}
+
+textarea {
+  width: 20rem;
+  height: 3rem;
+  display : block;
+  margin: 0.4rem 0;
+}
+
+.comment_form {
+  margin: 1.4rem 0 0;
 }

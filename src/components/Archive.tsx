@@ -11,7 +11,13 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
 
-export default function Home({ archive, setArchive }: { archive: BillyBlogArchive[]; setArchive: React.Dispatch<BillyBlogArchive[]> }) {
+export default function Home({
+  archive,
+  setArchive,
+}: {
+  archive: BillyBlogArchive[];
+  setArchive: React.Dispatch<BillyBlogArchive[]>;
+}) {
   const pb = useAtomValue(PocketBaseAtom);
 
   useEffect(() => {
