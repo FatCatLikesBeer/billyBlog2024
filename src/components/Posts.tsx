@@ -4,13 +4,13 @@ import { marked } from "marked";
 import formatTimeStamp from "../library/formatTimeStamp";
 import embiggenImage from "../library/embiggenImage";
 import customRenderer from "../library/markedCustomRenderer";
+import PostsCommentComponent from "./PostsCommentComponent";
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
 const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
-
 
 export default function Posts({
   posts,
@@ -58,25 +58,33 @@ export default function Posts({
             <p key={post.id + 'body'} className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }} ></p>
             {post.attachment
               ?
-              <>
+              <div className="image_container">
                 <img
                   className="post_attachment"
                   key={post.id + 'attachment'}
                   src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
                   onClick={(e) => embiggenImage(e.currentTarget)}
                 />
-              </>
+              </div>
               :
               ""}
             <div className="post_comment_container" key={post.id + "comment_container"}>
-              {postComments[post?.id]?.map((element) => {
-                return (
-                  <div key={element.id + "comment"} className="post_comment_block">
-                    <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
-                    <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
-                  </div>
-                )
-              })}
+              <div className="post_comment_block">
+                {postComments[post?.id]?.map((element) => {
+                  return (
+                    <div key={element.id + "comment"}>
+                      <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
+                      <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+                    </div>
+                  )
+                })}
+              </div>
+              {post.id.length > 2 ? <PostsCommentComponent
+                parentId={post.id}
+                pb={pb}
+                postComments={postComments}
+                setPostComments={setPostComments}
+              /> : ""}
             </div>
           </div>
         );

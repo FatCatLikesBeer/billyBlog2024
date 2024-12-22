@@ -70,54 +70,58 @@ export default function StaticPost() {
         <p key={post.id + 'body'} className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }}></p>
         {post.attachment
           ?
-          <img
-            className="post_attachment"
-            key={post.id + 'attachment'}
-            src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
-            onClick={(e) => embiggenImage(e.currentTarget)}
-          />
+          <div className="image_container">
+            <img
+              className="post_attachment"
+              key={post.id + 'attachment'}
+              src={`${URL}${post.collectionId}/${post.id}/${post.attachment}`}
+              onClick={(e) => embiggenImage(e.currentTarget)}
+            />
+          </div>
           :
           ""}
         {/* Comments */}
         <div className="post_comment_container" key={post.id + "comment_container"}>
-          {comments?.map((element) => {
-            return (
-              <div key={element.id + "comment"} className="post_comment_block">
-                <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
-                <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
-              </div>
-            )
-          })}
+          <div className="post_comment_block">
+            {comments?.map((element) => {
+              return (
+                <div key={element.id + "comment"}>
+                  <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
+                  <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+                </div>
+              )
+            })}
+          </div>
+          {/* Comment Form */}
+          {post.id.length < 2
+            ?
+            ""
+            :
+            <form className="comment_form">
+              <input
+                type="text"
+                name="Name"
+                placeholder="Name"
+                className="comment_name"
+                value={createComment.author}
+                onChange={setCommenterAuthor}
+              />
+              <textarea
+                name="Body"
+                placeholder="Comment here"
+                className="comment_body"
+                value={createComment.body}
+                onChange={setCommenterBody}
+              />
+              <button
+                className="comment_submit"
+                onClick={handleSubmit}
+                type="button"
+                disabled={(createComment.author.length < 1) || (createComment.body.length < 2) ? true : false}
+              >Comment</button>
+            </form>
+          }
         </div>
-        {/* Comment Form */}
-        {post.id.length < 2
-          ?
-          ""
-          :
-          <form className="comment_form">
-            <input
-              type="text"
-              name="Name"
-              placeholder="Name"
-              className="comment_name"
-              value={createComment.author}
-              onChange={setCommenterAuthor}
-            />
-            <textarea
-              name="Body"
-              placeholder="Comment here"
-              className="comment_body"
-              value={createComment.body}
-              onChange={setCommenterBody}
-            />
-            <button
-              className="comment_submit"
-              onClick={handleSubmit}
-              type="button"
-              disabled={(createComment.author.length < 1) || (createComment.body.length < 2) ? true : false}
-            >Comment</button>
-          </form>
-        }
       </div>
     </>
   );
