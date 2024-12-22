@@ -61,6 +61,16 @@ export default function StaticPost() {
     setCreateComment({ author: "", body: "", parent: params.postId });
   }
 
+  function deleteComment(element: BillyBlogPostComment) {
+    if (window.confirm(`---DELETE COMMENT---\n\n${element.author} - ${formatTimeStamp(element.created)}\n${element.body}`)) {
+      pb.collection('comments').delete(element.id)
+        .then(() => { window.alert("Comment Deleted!") })
+        .finally(() => { window.location.reload(); });
+    } else {
+      console.log("Comment not deleted");
+    }
+  }
+
   return (
     <>
       {errMessage.length > 2 && post.id.length < 2 && errTimer ? <p className="error_message">errMessage.toString()</p> : ""}
@@ -87,7 +97,17 @@ export default function StaticPost() {
               return (
                 <div key={element.id + "comment"}>
                   <p className="post_comment_author" key={element.id + "author"}>{element.author} — {formatTimeStamp(element.created)}</p>
-                  <p className="post_comment_body" key={element.id + "body"}>{element.body}</p>
+                  <p
+                    className="post_comment_body"
+                    key={element.id + "body"}
+                    onClick={
+                      pb.authStore.isAdmin
+                        ?
+                        () => { deleteComment(element) }
+                        :
+                        () => { }
+                    }
+                  >{element.body}</p>
                 </div>
               )
             })}

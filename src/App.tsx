@@ -57,6 +57,3 @@ function App() {
 }
 
 export default App;
-
-// TODO: Implement comments for posts. Admins can delete comments while logged in.
-// TODO: Maybe make a custom API endpoint for PockeBase for comment/email validation.
