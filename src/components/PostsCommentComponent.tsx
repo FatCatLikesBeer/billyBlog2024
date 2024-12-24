@@ -62,7 +62,7 @@ export default function PostsCommentComponent({
                 type="button"
                 onClick={submitComment}
                 disabled={(comment.author.length < 1) || (comment.body.length < 2)}
-              >Submit Comment</button>
+              >Submit</button>
               <button type="button" onClick={closeForm}>Cancel</button>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function PostsCommentComponent({
           <button
             type="button"
             onClick={expandComment}
-          >Leave Comment</button>
+          >Comment</button>
       }
     </>
   );
