@@ -12,6 +12,10 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
 
+/**
+ * Details view for an individual archived post
+ * @returns a view for an individual archived post
+ */
 export default function StaticArchive() {
   const [errTimer, setErrTiemr] = useState(false);
   const [errMessage, setErrMessage] = useState<string>("");

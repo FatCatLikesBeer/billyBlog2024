@@ -11,6 +11,12 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
 
+/**
+ * Archive Component - Posts from old blog
+ * @prop archive - collection of archived posts
+ * @prop setArchive - React.Dispatch function for setting archive
+ * @returns a div containing archived posts
+ */
 export default function Home({
   archive,
   setArchive,

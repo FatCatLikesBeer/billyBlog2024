@@ -1,6 +1,10 @@
+/**
+ * About component
+ * @returns div containing info about me
+ */
 export default function About() {
   return (
-    <>
+    <div>
       <h1>About</h1>
       <p>Self-taught web developer specializing in TypeScript. Fascinated by the power of browser Web APIs. Reluctantly believes that people's primary web experience happens on mobile.<sup><a href="#index1" className="super_script">1</a></sup></p>
       <p>Current occupation: Facility and automation specialist for indoor cannabis operations in Los Angeles.</p>
@@ -12,6 +16,6 @@ export default function About() {
         <p id="index2" className="index_text">2) Used to build this blog.</p>
         <p id="index3" className="index_text">3) Technology I've previously used but have since abandoned</p>
       </div>
-    </>
+    </div>
   )
 }

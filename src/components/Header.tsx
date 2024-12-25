@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Blog header - contains blog name, navigation, and social
+ */
 export default function Header() {
   return (
     <header id='header'>

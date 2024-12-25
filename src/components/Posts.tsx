@@ -12,6 +12,14 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
 
+/**
+ * Home/Posts Component
+ * @prop posts - collection of blog posts to display
+ * @prop setPosts - setter fucntion for posts
+ * @prop postComments - collection of post comments to display
+ * @prop setPostComments - setter function for comments
+ * @returns a div containing posts
+ */
 export default function Posts({
   posts,
   setPosts,
@@ -32,6 +40,11 @@ export default function Posts({
           const items = response.items;
           setPosts([...items]);
         });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (posts.length <= 1) {
       pb.collection('comments').getFullList<BillyBlogPostComment>({ sort: "-created" })
         .then((response) => {
           const commentsObjCollection: BillyBlogPostCommentCollection = {};
@@ -39,7 +52,7 @@ export default function Posts({
             if (!commentsObjCollection[element.parent]) {
               commentsObjCollection[element.parent] = [];
             }
-            commentsObjCollection[element.parent]?.push(element);
+            commentsObjCollection[element.parent]!.push(element);
           });
           setPostComments({ ...commentsObjCollection });
         });

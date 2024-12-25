@@ -3,6 +3,10 @@ import { useAtomValue } from "jotai";
 import PocketBaseAtom from "../state/PocketBaseAtom";
 import { SetStateAction } from "jotai";
 
+/**
+ * Login to create post
+ * @returns a form for logging in
+ */
 export default function MakePostAuth({ setLoggedIn }: { setLoggedIn: Dispatch<SetStateAction<boolean>> }) {
   const [errMessage, setErrMessage] = useState<string>("");
   const [form, setForm] = useState({ email: "", password: "" });

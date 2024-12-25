@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 import PocketBaseAtom from "../state/PocketBaseAtom";
 
+/**
+ * Starting point for logging in & creating posts
+ * @returns a div either login Auth Component or the blog post form
+ */
 export default function MakePost() {
   const pb = useAtomValue(PocketBaseAtom);
   const [loggedIn, setLoggedIn] = useState<boolean>(pb.authStore.isValid);
@@ -18,13 +22,11 @@ export default function MakePost() {
   }
 
   return (
-    <>
-      <div style={{ position: "relative" }}>
-        {loggedIn ? <MakePostForm pb={pb} /> : <MakePostAuth setLoggedIn={setLoggedIn} />}
-        {loggedIn &&
-          <button style={{ position: "absolute", top: 0, right: 0 }} onClick={handleLogout}>Log Out</button>
-        }
-      </div>
-    </>
+    <div style={{ position: "relative" }}>
+      {loggedIn ? <MakePostForm pb={pb} /> : <MakePostAuth setLoggedIn={setLoggedIn} />}
+      {loggedIn &&
+        <button style={{ position: "absolute", top: 0, right: 0 }} onClick={handleLogout}>Log Out</button>
+      }
+    </div>
   );
 }

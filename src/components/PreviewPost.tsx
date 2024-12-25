@@ -4,8 +4,20 @@ import { marked } from 'marked';
 import formatTimeStamp from '../library/formatTimeStamp';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * View for previewing fully styled post
+ * @prop post - post object containg draft into
+ * @prop setPreviewPost - set to false to close preview
+ * @prop pb - PocketBase client object
+ * @returns Fully stylized post preview
+ */
 export default function PreviewPost(
-  { post, setPreviewPost, pb }: { post: BillyBlogDraft; setPreviewPost: React.Dispatch<React.SetStateAction<boolean>>; pb: PocketBase }
+  { post, setPreviewPost, pb }:
+    {
+      post: BillyBlogDraft;
+      setPreviewPost: React.Dispatch<React.SetStateAction<boolean>>;
+      pb: PocketBase;
+    }
 ) {
   const [errMessage, setErrMessage] = useState<string>("");
   const navigate = useNavigate();
@@ -28,7 +40,6 @@ export default function PreviewPost(
 
   return (
     <>
-      <button onClick={handleClose} type="button">Close</button>
       {errMessage.length > 2 ? <p style={{ color: "red" }}>{errMessage}</p> : ""}
       <div>
         <h3 className="post_title">{post.title}</h3>
@@ -36,7 +47,15 @@ export default function PreviewPost(
         <p className="post_body" dangerouslySetInnerHTML={{ __html: parsedBody }}></p>
         {fileURL ? <img src={fileURL} /> : ""}
       </div>
-      <button onClick={handleSubmit} type="button">Submit</button>
+      <div style={{
+        display: "flex",
+        width: '170px',
+        justifyContent: "space-between",
+        marginTop: "3rem",
+      }}>
+        <button onClick={handleSubmit} type="button">Submit ✅</button>
+        <button onClick={handleClose} type="button">Edit ✍🏽</button>
+      </div>
     </>
   );
 }

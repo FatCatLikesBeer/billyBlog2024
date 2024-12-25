@@ -2,6 +2,10 @@ import { useState } from "react";
 import PreviewPost from "./PreviewPost";
 import PocketBase from 'pocketbase';
 
+/**
+ * Form for creating posts
+ * @returns a from for creating posts
+ */
 export default function MakePostForm({ pb }: { pb: PocketBase }) {
   const [post, setPost] = useState<BillyBlogDraft>({ title: "", body: "", author: "Billy" });
   const [previewPost, setPreviewPost] = useState<boolean>(false);

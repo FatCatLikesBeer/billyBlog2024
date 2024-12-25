@@ -1,6 +1,15 @@
 import { useState } from "react";
 import Client from "pocketbase";
 
+/**
+ * Comment form for Posts/Home
+ * @param parentId - Id of relevant post
+ * @param pb - The PocketBase client
+ * @param postComments - Requred from updating comments on successful comment submission
+ * @param setPostComments - Requred from updating comments on successful comment submission
+ * @returns A button that shows a form
+ */
+
 export default function PostsCommentComponent({
   parentId,
   pb,
@@ -15,7 +24,7 @@ export default function PostsCommentComponent({
   const [comment, setComment] = useState({ parent: parentId, author: "", body: "" });
   const [showCommentForm, setShowCommentForm] = useState(false);
 
-  const expandComment = () => setShowCommentForm(true);
+  const expandForm = () => setShowCommentForm(true);
 
   function handleAuthor(event: React.ChangeEvent<HTMLInputElement>) {
     let newComment = { ...comment };
@@ -37,7 +46,7 @@ export default function PostsCommentComponent({
   function submitComment() {
     pb.collection('comments').create<BillyBlogPostComment>(comment)
       .then((response) => {
-        const newComments = { ...postComments };
+        const newComments: BillyBlogPostCommentCollection = { ...postComments };
         if (!newComments[parentId]) { newComments[parentId] = [] }
         newComments[parentId].reverse().push(response);
         newComments[parentId].reverse();
@@ -69,7 +78,7 @@ export default function PostsCommentComponent({
           :
           <button
             type="button"
-            onClick={expandComment}
+            onClick={expandForm}
           >Comment</button>
       }
     </>

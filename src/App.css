@@ -123,6 +123,7 @@ textarea {
   height: 5rem;
   display : block;
   margin: 0.4rem 0;
+  font-family: Helvetica;
 }
 
 .comment_form {

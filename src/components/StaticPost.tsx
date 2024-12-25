@@ -12,6 +12,10 @@ const URL = "https://billy-blog.pockethost.io/api/files/";
 
 marked.setOptions({ renderer: customRenderer });
 
+/**
+ * Details view for an individual post
+ * @returns a view for an individual post comments section
+ */
 export default function StaticPost() {
   const params = useParams();
   const [errTimer, setErrTiemr] = useState(false);
