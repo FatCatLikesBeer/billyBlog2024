@@ -2,12 +2,12 @@
  * Blog Post
  */
 interface BillyBlogPost {
-  /** Post id: string */
+  /** Id of post: string */
   id: string;
   /** Post body: string */
   body: string;
   /** Post attachment: URL */
-  attachment?: string;
+  attachment?: URL;
   /** Post title: string */
   title: string;
   /** Post date created: string */
