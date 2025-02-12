@@ -36,6 +36,11 @@ export default function Apps() {
           <td>Like boredapi.com (RIP) but for programmers! 💻</td>
           <td><a href="https://github.com/FatCatLikesBeer/bored_programmer" target="_blank">GitHub</a></td>
         </tr>
+        <tr>
+          <td><a href="https://billy-blog.pockethost.io/apps" target="_blank">Bored Programmer</a></td>
+          <td>Password Hawk: A password generator 🪶</td>
+          <td><a href="https://github.com/FatCatLikesBeer/password-hawk-backend" target="_blank">GitHub</a></td>
+        </tr>
       </table>
     </div>
   );
