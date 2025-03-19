@@ -12,6 +12,11 @@ export default function Apps() {
           <th>Source Code</th>
         </tr>
         <tr>
+          <td><a href="https://app.billlaaayyy.dev" target="_blank">App</a></td>
+          <td>The Odin Project final Project: Social Media App</td>
+          <td><a href="https://github.com/FatCatLikesBeer/theThirdFrontEnd">FrontEnd</a> <a href="https://github.com/FatCatLikesBeer/theThirdBackEnd">BackEnd</a></td>
+        </tr>
+        <tr>
           <td><a href="https://billy-blog.pockethost.io" target="_blank">billy-blog</a></td>
           <td>This is my blog! You're already here! 😆</td>
           <td>N/A</td>
