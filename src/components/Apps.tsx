@@ -42,7 +42,7 @@ export default function Apps() {
           <td><a href="https://github.com/FatCatLikesBeer/bored_programmer" target="_blank">GitHub</a></td>
         </tr>
         <tr>
-          <td><a href="https://billy-blog.pockethost.io/apps" target="_blank">Password Hawk</a></td>
+          <td><a href="https://password-hawk.fly.dev/" target="_blank">Password Hawk</a></td>
           <td>A random passcode or passphrase generator 🪶</td>
           <td><a href="https://github.com/FatCatLikesBeer/password-hawk-backend" target="_blank">GitHub</a></td>
         </tr>
